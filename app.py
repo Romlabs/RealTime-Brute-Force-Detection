@@ -216,7 +216,7 @@ elif page == "📥 Load Data":
     df = st.session_state.df_raw
     if df is not None:
         st.subheader("Preview")
-        st.dataframe(df.head(10), width="stretch")
+        st.dataframe(df.head(10), use_container_width=True)
         c1, c2, c3 = st.columns(3)
         c1.metric("Rows", f"{df.shape[0]:,}")
         c2.metric("Cols", df.shape[1])
@@ -240,7 +240,7 @@ elif page == "🧹 Data Cleaning":
 
     df = st.session_state.df_clean
     if df is not None:
-        st.dataframe(df.head(10), width="stretch")
+        st.dataframe(df.head(10), use_container_width=True)
 
         if "attack_detected" in df.columns:
             col1, col2 = st.columns(2)
@@ -454,7 +454,7 @@ elif page == "📊 Feature Importance":
                 ax=ax, palette="viridis")
     ax.set_title(f"Top {top_n} Feature Importances")
     st.pyplot(fig)
-    st.dataframe(imp_df, width="stretch")
+    st.dataframe(imp_df, use_container_width=True)
 
 
 elif page == "🔮 Predict":
@@ -488,7 +488,7 @@ elif page == "🔮 Predict":
         out["attack_probability"] = probas.round(4)
 
         st.success(f"Predicted {len(out)} rows.")
-        st.dataframe(out.head(50), width="stretch")
+        st.dataframe(out.head(50), use_container_width=True)
         st.download_button("⬇️ Download Predictions",
                            out.to_csv(index=False).encode("utf-8"),
                            "predictions.csv", "text/csv")
